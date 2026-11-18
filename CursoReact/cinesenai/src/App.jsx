@@ -1,11 +1,13 @@
-import { Rodape } from "./components/Rodape"
+import { Navbar } from "./components/Navbar";
 
 function App () {
+  
   return (
     <>
-      <h1>CineSenai</h1>
-      <Rodape />
-      <Rodape />
+    <Navbar />
+    <div className="container">
+      <h1>Catálogo</h1>
+    </div>
     </>
   );
 }
