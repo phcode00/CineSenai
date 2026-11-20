@@ -2,12 +2,23 @@ export const FilmeCard = ({titulo, genero, duracaoMinutos, urlPoster, descricao 
     return (
         <div className="movie-card glass glass-hover">
 
-            <div className="movie-poster-wrapper">
+            {/* <div className="movie-poster-wrapper">
                 <img 
                 src= {urlPoster} 
                 alt= {`Pôster do filme ${titulo}`}
                 className="movie-poster"
                 />
+            </div> */}
+
+            <div className="movie-poster-wrapper">
+                {urlPoster ? (
+                    <img src={urlPoster} alt={`Pôster do filme ${titulo}`} className="movie-poster" />
+                ) : (
+                    <div className="movie-poster-fallback">
+                        <span>{titulo}</span>
+                    </div>
+                        
+                )}
             </div>
 
             <div className="movie-info">
@@ -20,7 +31,7 @@ export const FilmeCard = ({titulo, genero, duracaoMinutos, urlPoster, descricao 
                     <span className="movie-details-link">Ver detalhes &gt;</span>
 
                 </div>
-
+                
             </div>
 
         </div>
