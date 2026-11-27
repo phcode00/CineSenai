@@ -1,3 +1,5 @@
+
+import { useState } from "react";
 import "./Home.css";
 import { FilmeCard } from "../components/FilmeCard";
 
@@ -58,10 +60,31 @@ const filmes = [
 ];
 
 export const Home = () => {
+
+  const [search, setSearch] = useState("");
+
+  const filteredFilmes = filmes.filter((filme) => {
+    
+    const matchesSearch = filme.titulo.toLowerCase().includes(search.toLowerCase()) || (filme.descricao && filme.descricao.toLowerCase().includes(search.toLowerCase()));
+
+    return matchesSearch
+  })
+
   return (
     <div className="container">
       <div className="page-header catalog-header">
         <h2 className="catalog-title">Nosso catálogo</h2>
+
+        <div className="catalog-filters">
+            <div className="filter-search">
+                <input type="text"
+                className="form-control"
+                placeholder="Pesquisar filmes por título ou descrição..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)} // O "e" é cada letra digitada
+                />
+            </div>
+        </div>
       </div>
 
       {/* <div className="movie-grid">
@@ -81,9 +104,9 @@ export const Home = () => {
         {filmes.length} {filmes.length === 1 ? "Filme" : "Filmes"} Em cartaz
       </p>
 
-      {filmes.length > 0 ? (
+      {filteredFilmes.length > 0 ? (
         <div className="movie-grid">
-          {filmes.map((filme) => (
+          {filteredFilmes.map((filme) => (
             <FilmeCard
               key={filme.id}
               titulo={filme.titulo}
